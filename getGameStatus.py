@@ -1,6 +1,7 @@
 import pyscreenshot as ImageGrab
 # import colormap
 
+Play_Button = [255, 255, 255]
 confirmButton = [126, 195, 255]
 myTurn = [206, 163, 2]
 enemyTurn = [82, 73, 62]
@@ -19,13 +20,34 @@ def distance(g1, g2):
     return sum
 
 def getStatus():
-    im = ImageGrab.grab(bbox=(890, 830, 891, 831))  # X1,Y1,X2,Y2
+
+
     cordinate = 0, 0
     err = 5000
+    im = ImageGrab.grab(bbox=(1355, 887, 1360, 888))  # X1,Y1,X2,Y2
+    r, g, b = im.getpixel(cordinate)
+
+    # out side game
+    if distance([r, g, b], Play_Button) < err:
+        print("Outside Game.. ")
+        return 6
+
+    # selecting card
+    im = ImageGrab.grab(bbox=(540, 790, 550, 793))  # X1,Y1,X2,Y2
+    r, g, b = im.getpixel(cordinate)
+
+    if distance([r, g, b], confirmButton) < err:
+        print("Selecting Card..")
+        return 5
+
+
+    im = ImageGrab.grab(bbox=(890, 830, 891, 831))  # X1,Y1,X2,Y2
     r, g, b = im.getpixel(cordinate)
     if distance([r, g, b], confirmButton) < err:
         print("Confirm button..")
         return 1    # 开局点确认
+
+
 
     im = ImageGrab.grab(bbox=(1578, 478, 1580, 480))  # X1,Y1,X2,Y2
     r, g, b = im.getpixel(cordinate)
@@ -41,12 +63,7 @@ def getStatus():
         print("Enemy turn..")
         return 4
 
-    im = ImageGrab.grab(bbox=(540, 790, 550, 793))  # X1,Y1,X2,Y2
-    r, g, b = im.getpixel(cordinate)
 
-    if distance([r, g, b], confirmButton) < err:
-        print("Selecting Card..")
-        return 5
 
     print("Unknown Status..")
     return 0 # outside game

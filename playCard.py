@@ -1,6 +1,6 @@
 import pyscreenshot as ImageGrab
 import pyautogui, random, PIL
-import time
+import time, Utils
 import getGameStatus
 
 Minion_To = [970, 200] # [1400, 600]
@@ -9,6 +9,7 @@ Hero_Position = [960, 770]
 Enemy_Hero_Position = [970, 200]
 HeroPower_Position = [1130, 830]
 
+util = Utils.utils()
 
 
 def heroPower():
@@ -21,7 +22,7 @@ def playHero():
     pyautogui.click()
     pyautogui.moveTo(Enemy_Hero_Position[0], Enemy_Hero_Position[1])
     pyautogui.click()
-
+    # if taunted then attack minions
     for minion_x in range(560, 1500, 138):
         pyautogui.moveTo(minion_x, 430)
         # time.sleep(0.25)
@@ -128,7 +129,35 @@ def playHandCard(i):
     pyautogui.click()
     pyautogui.moveTo(Minion_To[0], Minion_To[1])
     pyautogui.click()
+
+    # determine if impossible to play card
+    im = ImageGrab.grab(bbox=(1111, 696, 1115, 700))  # X1,Y1,X2,Y2
+    cordinate = 0, 0
+    r, g, b = im.getpixel(cordinate)
+    tauntStatus = False # taunt or rush
+    if isTaunt([r, g, b]): tauntStatus = True
+    if tauntStatus:
+        # pyautogui.rightClick()
+        for minion_x in range(560, 1500, 138):
+            pyautogui.moveTo(minion_x, 430)
+            # time.sleep(0.25)
+            pyautogui.click()
+        # im = ImageGrab.grab(bbox=(400, 430, 1500, 460))  # X1,Y1,X2,Y2
+
+
     return True
+
+def moveTo(position):
+    pyautogui.moveTo(position[0], position[1])
+
+def emote():
+    moveTo(util.HERO_POSITION)
+    pyautogui.rightClick()
+    emotes = util.EMOTE_POSITION
+    rand = random.randint(0, len(emotes) - 1)
+    moveTo(emotes[rand])
+    pyautogui.click()
+
 
 # for i in range(7):
 #     playHandCard(i)
