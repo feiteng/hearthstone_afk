@@ -22,7 +22,10 @@ for i in range(len(cardPositions)):
     pyautogui.click()
     moveTo(disenchant_Confirm)
     pyautogui.click()
-    # pyautogui.rightClick()
+    moveTo(disenchant_Button)
+    pyautogui.click()
+    pyautogui.click()
+    pyautogui.rightClick()
 
     time.sleep(1)
 
