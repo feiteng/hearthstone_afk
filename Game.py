@@ -29,7 +29,7 @@ confirmCards_Position = [950, 850]
 # pyautogui.moveTo(EndTurn_Position[0], EndTurn_Position[1])
 
 
-import Hunter, Priest, DemonHunter
+import Hunter, Priest, DemonHunter, Shaman
 
 class Game():
     def clicks(self):
@@ -117,7 +117,7 @@ class Game():
         self.click(StartGame_Position)
 
     def runGame(self, choice):
-        choiceList = ['Hunter', 'Demon Hunter', 'Priest']
+        choiceList = ['Hunter', 'Demon Hunter', 'Priest', 'Shaman']
         gameStatusList = ['Unknown', 'Confirm', 'My Turn', 'End Turn', 'Enemy Turn', 'Select Card', 'Oustide Game']
         print("running as %s.." % choiceList[choice])
 
@@ -148,6 +148,7 @@ class Game():
                 if choice == 0: Hunter.gameStatus2()
                 if choice == 1: DemonHunter.gameStatus2()
                 if choice == 2: Priest.gameStatus2()
+                if choice == 3: Shaman.gameStatus2()
 
 
             if gameStatus == 3:
