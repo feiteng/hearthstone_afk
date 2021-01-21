@@ -27,6 +27,7 @@ def gameStatus2():
         if not playCard.playBoardCard(i): break
     playCard.playHero()
     playCard.heroPower()
+    # time.sleep(15)
 
     # def runGame(self):
     #     # game = Game.Game()

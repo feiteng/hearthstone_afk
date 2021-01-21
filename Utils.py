@@ -16,6 +16,7 @@ class utils:
         self.ENEMY_MINION_POSITION = [937, 405]
         self.RECONNECT_BUTTON_POSITION = [800, 830]
         self.CONFIRM_CARD_POSITION = [950, 850]
+        self.RANDOM_CARD_POSITION = [[560, 500], [960, 500], [1330, 500]]
 
         # color code
         self.TAUNT_COLOR = [236, 227, 217]

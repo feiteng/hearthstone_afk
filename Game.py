@@ -1,4 +1,4 @@
-import pyscreenshot as ImageGrab
+import pyscreenshot as ImageGrab, Utils
 import pyautogui, random, PIL
 import time
 import getGameStatus
@@ -31,7 +31,10 @@ confirmCards_Position = [950, 850]
 
 import Hunter, Priest, DemonHunter, Shaman
 
-class Game():
+class Game:
+    def __init__(self):
+        self.util = Utils.utils()
+
     def clicks(self):
         cap = random.randint(1, 2)
         for i in range(cap):
@@ -60,13 +63,13 @@ class Game():
         self.sleepClick()
 
     def random_card_Position(self):
-        p1 = [560, 500]
-        p2 = [960, 500]
-        p3 = [1330, 500]
-        rand = random.randint(1, 3)
-        if rand == 1: return p1
-        if rand == 2: return p2
-        return p3
+        # p1 = [560, 500]
+        # p2 = [960, 500]
+        # p3 = [1330, 500]
+        rand = random.randint(0, 2)
+        # if rand == 1: return p1
+        # if rand == 2: return p2
+        return self.util.RANDOM_CARD_POSITION[rand]
 
     def gameStatus0(self):
         print("unknown game status... wait for 4 seconds")
@@ -78,8 +81,8 @@ class Game():
 
     def gameStatus1(self):
         # game starts, click confirm
-        self.click(self.random_card_Position())
-        self.click(self.random_card_Position())
+        # self.click(self.random_card_Position())
+        # self.click(self.random_card_Position())
         self.click(confirmCards_Position)
 
     def gameStatus2(self):
@@ -125,7 +128,9 @@ class Game():
             # start game
             print("getting game status..")
             rand = random.random()
-            if rand < 0.5: playCard.emote()
+            if rand < 0.2:
+                print("emote..")
+                playCard.emote()
             gameStatus = getGameStatus.getStatus()
             # 1 - Confirm
             # 2 - My turn
@@ -144,12 +149,17 @@ class Game():
 
             if gameStatus == 2:
                 # my turn, play hand, board and hero
+                pyautogui.rightClick()
 
                 if choice == 0: Hunter.gameStatus2()
                 if choice == 1: DemonHunter.gameStatus2()
                 if choice == 2: Priest.gameStatus2()
                 if choice == 3: Shaman.gameStatus2()
 
+                time_remaining = 26
+                for i in range(time_remaining):
+                    time.sleep(1)
+                    if i % 5 == 0: print("wating.. %d seconds left.." % (time_remaining - i))
 
             if gameStatus == 3:
                 # end of turn

@@ -22,10 +22,10 @@ for i in range(choice):
     pyautogui.mouseDown(button='left')
 
     pyautogui.dragTo(open_position[0], open_position[1], duration=0.4)#, button='left')
-    time.sleep(1.5)
+    time.sleep(1.7)
     moveTo(confirm_position)
     pyautogui.click()
-    time.sleep(2)
+    time.sleep(2.5)
     for j in range(5):
         moveTo(pack[j])
         pyautogui.click()
