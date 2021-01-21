@@ -7,7 +7,7 @@ Basic logic:
 - Reads pixel color on your primary monitor and get status of current game
 - play hand cards, play board cards, play hero, end turn (tweak order for your desired hero / deck)
 - if attacking enemy hero is not available, tries to hit all 7 enemy board positions for taunt minions
-- surprise.. 19% win rate (depending on your deck ofc)
+
 
 
 Usage:
@@ -20,3 +20,5 @@ Lookouts:
 - animation could lead to problems
 - will try to play cards with similar color to green / yellow
 
+Demo Video:
+https://youtu.be/AkkgG2r28Xk
